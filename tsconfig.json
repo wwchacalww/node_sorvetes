@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",                                
+    "target": "ES2017",                                  
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./src",
+    "rootDir": "./",
+    "outDir": "dist",
+    "lib": [
+      "ESNext"
+    ],                      
+    "strict": true,                                      
+    "allowSyntheticDefaultImports": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "allowJs": true,
+    "sourceMap": true,
+  }
+}
