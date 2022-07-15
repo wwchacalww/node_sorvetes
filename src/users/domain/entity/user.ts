@@ -59,6 +59,13 @@ export class User extends Entity {
     this._password = newPassword;
   }
 
+  get isAdmin() {
+    return this._isAdmin;
+  }
+  private set isAdmin(isAdmin: boolean) {
+    this._isAdmin = isAdmin;
+  }
+
   toJSON() {
     return {
       id: this.id,
