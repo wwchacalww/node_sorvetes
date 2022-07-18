@@ -4,8 +4,11 @@ import { User } from "../../../domain/entity/user";
 import UserRepositoryInterface from "../../../domain/repository/user-repository.interface";
 import UserModel from "./user-model.sequelize";
 
-export default class UserRepository implements UserRepositoryInterface {
-  constructor(private userModel: typeof UserModel) {}
+export class UserRepository implements UserRepositoryInterface {
+  private userModel: typeof UserModel;
+  constructor() {
+    this.userModel = UserModel;
+  }
 
   async create(entity: User): Promise<User> {
     const { id, name, email, password, isAdmin } = entity;
