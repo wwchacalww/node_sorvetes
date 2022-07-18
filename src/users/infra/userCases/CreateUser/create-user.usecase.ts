@@ -1,3 +1,4 @@
+import NotificationError from "@seedwork/notification/notification.error";
 import { inject, injectable } from "tsyringe";
 import { User } from "users/domain/entity/user";
 import UserRepositoryInterface from "../../../domain/repository/user-repository.interface";
@@ -26,6 +27,13 @@ export class CreateUserUseCase {
   public async execute(
     props: CreateUserInputDTO
   ): Promise<CreateUserOutputDTO> {
+    const userExists = await this.userRepository.findByEmail(props.email);
+    if (userExists) {
+      throw new NotificationError([
+        { message: "User already exists", context: "createUser" },
+      ]);
+    }
+
     const entity = new User(props);
     const user = await this.userRepository.create(entity);
 
