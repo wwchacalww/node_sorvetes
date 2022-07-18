@@ -7,13 +7,17 @@ export class CreateUserController {
     const { name, email, password, isAdmin } = request.body;
     const createUser = container.resolve(CreateUserUseCase);
 
-    const user = await createUser.execute({
-      name,
-      email,
-      password,
-      isAdmin,
-    });
+    try {
+      const user = await createUser.execute({
+        name,
+        email,
+        password,
+        isAdmin,
+      });
 
-    return response.status(201).json(user);
+      return response.status(201).json(user);
+    } catch (err: any) {
+      return response.status(400).json(err.errors);
+    }
   }
 }

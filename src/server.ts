@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import express from "express";
 import { routes } from "./infra/routes";
-
 import "./infra/containers";
 import { setupDb } from "./infra/db/sequelize";
 

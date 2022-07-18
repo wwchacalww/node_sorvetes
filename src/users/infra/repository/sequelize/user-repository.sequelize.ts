@@ -13,13 +13,6 @@ export class UserRepository implements UserRepositoryInterface {
   async create(entity: User): Promise<User> {
     const { id, name, email, password, isAdmin } = entity;
 
-    const userExists = await this.userModel.findOne({ where: { email } });
-    if (userExists) {
-      throw new NotificationError([
-        { context: "createUser", message: "Email already exists" },
-      ]);
-    }
-
     const passwordHash = await hash(password, 10);
     await this.userModel.create({
       id,
@@ -78,5 +71,23 @@ export class UserRepository implements UserRepositoryInterface {
           isAdmin: userRepo.isAdmin,
         })
     );
+  }
+
+  async findByEmail(email: string): Promise<User | undefined> {
+    const userRepo = await this.userModel.findOne({
+      where: { email },
+    });
+
+    if (userRepo) {
+      return new User({
+        id: userRepo.id,
+        name: userRepo.name,
+        email: userRepo.email,
+        password: userRepo.password,
+        isAdmin: userRepo.isAdmin,
+      });
+    }
+
+    return undefined;
   }
 }

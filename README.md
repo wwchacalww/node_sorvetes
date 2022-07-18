@@ -16,9 +16,12 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 
   ### Infra do user
   - [X] Criação da interface dos repositórios
-  - [x] Criar repositórios
+  - [X] Criar repositórios
   - [X] Instalar o sequelize e o Sqlite3
   - [X] Testar tudo
   - [X] Criar rota
   - [X] Criar Controller
   - [X] Criar Injeção de dependência
+  
+## Notificação de errors
+  - [X] Notificação de errors no rest
