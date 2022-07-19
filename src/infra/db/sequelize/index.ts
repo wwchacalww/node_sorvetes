@@ -5,7 +5,7 @@ let sequelize: Sequelize;
 async function setupDb() {
   sequelize = new Sequelize({
     dialect: "sqlite",
-    storage: ":memory:",
+    storage: "./db.sqlite",
     logging: false,
   });
   sequelize.addModels([UserModel]);

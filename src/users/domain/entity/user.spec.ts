@@ -1,5 +1,4 @@
 import { User } from "./user";
-
 describe("User entity unit test", () => {
   it("should create a new user", async () => {
     const user = new User({

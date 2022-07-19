@@ -25,3 +25,8 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
   
 ## Notificação de errors
   - [X] Notificação de errors no rest
+
+## Autenticação e Autorização
+-[X] Criação do middleware de autenticação
+-[X] Refatorar routa com middleare
+-[ ] Criação do middleware de autorização
