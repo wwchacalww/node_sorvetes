@@ -49,8 +49,11 @@ export class AuthenticateUseCase {
       expiresIn: 60 * 10, // 20 seconds
     });
 
+    const refreshToken = await this.userRepository.createRefreshToken(user);
+
     return {
       token,
+      refreshToken,
     };
   }
 }

@@ -39,3 +39,4 @@ lerna-debug.log*
 
 # DB
 db.sqlite
+data/
