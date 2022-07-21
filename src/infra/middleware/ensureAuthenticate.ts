@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import "dotenv/config";
-import { UserRepository } from "users/infra/repository/sequelize/user-repository.sequelize";
+import { UserRepository } from "users/infra/repository/prisma/user-repository.prisma";
 
 type PayLoadDTO = {
   id: string;
