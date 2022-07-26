@@ -7,6 +7,8 @@ type PayLoadDTO = {
   id: string;
   email: string;
   isAdmin: boolean;
+  permissions: string[];
+  roles: string[];
 };
 
 export async function ensureAuthenticate(
@@ -33,6 +35,7 @@ export async function ensureAuthenticate(
     const user = await userRepository.findById(id);
 
     if (!user) {
+      console.log("User not found");
       return response.status(401).json({
         message: "Invalid token",
       });
@@ -43,6 +46,8 @@ export async function ensureAuthenticate(
     request.user_isAdmin = isAdmin;
     next();
   } catch (error) {
+    console.log(error);
+
     return response.status(401).json({
       message: "Invalid token",
     });

@@ -94,11 +94,19 @@ export class UserRepository implements UserRepositoryInterface {
     );
   }
 
-  async createRefreshToken(user: User): Promise<string> {
+  async createRefreshToken(user_id: string): Promise<string> {
     const result = await prisma.users.findUnique({
       where: {
-        id: user.id,
+        id: user_id,
       },
+    });
+
+    const user = new User({
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      password: result.password,
+      isAdmin: result.isAdmin,
     });
 
     if (!result) {
@@ -108,6 +116,13 @@ export class UserRepository implements UserRepositoryInterface {
     }
 
     const refresh_token = new RefreshToken({ user });
+
+    await prisma.refreshTokens.deleteMany({
+      where: {
+        user_id,
+      },
+    });
+
     await prisma.refreshTokens.create({
       data: {
         id: refresh_token.id,

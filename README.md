@@ -30,9 +30,10 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 -[X] Criação do middleware de autenticação
 -[X] Refatorar routa com middleare
 -[ ] Criação do middleware de autorização
+-[X] Criação do refreshToken - rotas, controller e usecase
 
 ## Docker - Postgres
 -[X] Criar Dockerfile e dockercompose.yaml
 -[X] Desinstalar o sequelize e trocar pelo prisma
 -[X] Instalar o Prisma
--[ ] Criar migrations do DB
+-[X] Criar migrations do DB

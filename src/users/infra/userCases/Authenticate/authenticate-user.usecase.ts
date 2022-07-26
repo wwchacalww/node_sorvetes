@@ -2,8 +2,7 @@ import NotificationError from "@seedwork/notification/notification.error";
 import { compare } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 import UserRepositoryInterface from "users/domain/repository/user-repository.interface";
-import { sign } from "jsonwebtoken";
-import "dotenv/config";
+import { createJWToken } from "@seedwork/services/createJWToken";
 
 export type AuthenticateInputDTO = {
   email: string;
@@ -39,21 +38,26 @@ export class AuthenticateUseCase {
       ]);
     }
 
-    const payload: PayloadOutputDTO = {
+    const permissions = user.isAdmin
+      ? ["users.list", "users.create"]
+      : ["user"];
+    const roles = user.isAdmin ? ["administrator"] : [];
+    const tokenInput = {
       id: user.id,
       email: user.email,
       isAdmin: user.isAdmin,
+      permissions,
+      roles,
     };
-    const token = sign(payload, process.env.JWT_SECRET, {
-      subject: user.email,
-      expiresIn: 60 * 10, // 20 seconds
-    });
+    const token = createJWToken(tokenInput);
 
-    const refreshToken = await this.userRepository.createRefreshToken(user);
+    const refreshToken = await this.userRepository.createRefreshToken(user.id);
 
     return {
       token,
       refreshToken,
+      permissions,
+      roles,
     };
   }
 }
