@@ -37,3 +37,10 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 -[X] Desinstalar o sequelize e trocar pelo prisma
 -[X] Instalar o Prisma
 -[X] Criar migrations do DB
+
+## Produtos
+-[X] Criar entidate
+-[X] Testes unitários
+-[ ] Criar usecase
+-[ ] Criar Controllhers
+-[ ] Criar rotas
