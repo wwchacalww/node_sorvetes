@@ -41,6 +41,9 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 ## Produtos
 -[X] Criar entidate
 -[X] Testes unitários
--[ ] Criar usecase
--[ ] Criar Controllhers
--[ ] Criar rotas
+-[X] Criar interface do repositório
+-[X] Criar migration e tabela product
+-[X] Criar repositório
+-[X] Criar usecase
+-[X] Criar Controllhers
+-[X] Criar rotas

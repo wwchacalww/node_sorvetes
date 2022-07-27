@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { ensureAuthenticate } from "infra/middleware/ensureAuthenticate";
-import { AuthenticateController } from "../userCases/Authenticate/authenticate-user-controller";
-import { CreateUserController } from "../userCases/CreateUser/create-user.controller";
-import { RefreshTokenController } from "../userCases/RefreshToken/refresh-token.controller";
-import { MeController } from "../userCases/me/me.controller";
+import { AuthenticateController } from "../usecases/Authenticate/authenticate-user-controller";
+import { CreateUserController } from "../usecases/CreateUser/create-user.controller";
+import { RefreshTokenController } from "../usecases/RefreshToken/refresh-token.controller";
+import { MeController } from "../usecases/me/me.controller";
 
 const userRouter = Router();
 

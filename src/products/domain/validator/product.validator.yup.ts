@@ -19,6 +19,11 @@ export class ProductValidator implements ValidatorInterface<Product> {
             .required("Category is required")
             .min(3, "Category must be at least 3 characters")
             .max(20, "Category must be at most 20 characters"),
+          code: yup
+            .string()
+            .required("Code is required")
+            .min(3, "Code must be at least 3 characters")
+            .max(10, "Code must be at most 10 characters"),
           barcode: yup
             .string()
             .required("Barcode is required")
@@ -31,6 +36,7 @@ export class ProductValidator implements ValidatorInterface<Product> {
             name: entity.name,
             description: entity.description,
             category: entity.category,
+            code: entity.code,
             barcode: entity.barcode,
             isActive: entity.isActive,
           },
