@@ -26,7 +26,7 @@ export function createJWToken({
     process.env.JWT_SECRET,
     {
       subject: email,
-      expiresIn: 60 * 15,
+      expiresIn: 3600 * 4, // 4 hours
     }
   );
 }
