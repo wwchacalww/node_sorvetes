@@ -40,8 +40,8 @@ export class AuthenticateUseCase {
 
     const permissions = user.isAdmin
       ? ["users.list", "users.create"]
-      : ["user"];
-    const roles = user.isAdmin ? ["administrator"] : [];
+      : ["read"];
+    const roles = user.isAdmin ? ["administrator"] : ["cashier"];
     const tokenInput = {
       id: user.id,
       email: user.email,

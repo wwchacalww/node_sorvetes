@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { ensureAuthenticate } from "infra/middleware/ensureAuthenticate";
+import { onlyAdmin } from "infra/middleware/onlyAdmin";
 import { CreateProductController } from "../usecases/CreateProduct/create-product.controller";
 import { FindByCodeProductController } from "../usecases/FindByCode/find-by-code-product.controller";
 import { FindByBarcodeProductController } from "../usecases/FindByBarcode/find-by-barcode-product.controller";
@@ -20,7 +21,7 @@ const findByIdProductController = new FindByIdProductController();
 const updateProductController = new UpdateProductController();
 const deleteProductController = new DeleteProductController();
 
-productRouter.post("/", ensureAuthenticate, createProductController.handle);
+productRouter.post("/", onlyAdmin, createProductController.handle);
 productRouter.get("/", ensureAuthenticate, listProductsController.handle);
 productRouter.get(
   "/search/",
@@ -38,11 +39,7 @@ productRouter.get(
   findByBarcodeProductController.handle
 );
 productRouter.get("/:id", ensureAuthenticate, findByIdProductController.handle);
-productRouter.put("/", ensureAuthenticate, updateProductController.handle);
-productRouter.delete(
-  "/:id",
-  ensureAuthenticate,
-  deleteProductController.handle
-);
+productRouter.put("/", onlyAdmin, updateProductController.handle);
+productRouter.delete("/:id", onlyAdmin, deleteProductController.handle);
 
 export { productRouter };

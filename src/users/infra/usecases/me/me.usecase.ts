@@ -26,8 +26,8 @@ export class MeUsecase {
 
     const permissions = user.isAdmin
       ? ["users.list", "users.create"]
-      : ["user"];
-    const roles = user.isAdmin ? ["administrator"] : [];
+      : ["read"];
+    const roles = user.isAdmin ? ["administrator"] : ["cashier"];
 
     return {
       email: user.email,
