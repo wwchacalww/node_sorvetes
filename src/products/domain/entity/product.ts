@@ -7,14 +7,25 @@ type ProductProps = {
   name: string;
   description: string;
   category: string;
+  code: string;
   barcode: string;
   isActive: boolean;
+};
+
+type ProductPropsUpdate = {
+  name?: string;
+  description?: string;
+  category?: string;
+  code?: string;
+  barcode?: string;
+  isActive?: boolean;
 };
 
 export class Product extends Entity {
   private _name: string;
   private _description: string;
   private _category: string;
+  private _code: string;
   private _barcode: string;
   private _isActive: boolean;
 
@@ -23,6 +34,7 @@ export class Product extends Entity {
     this._name = data.name;
     this._description = data.description;
     this._category = data.category;
+    this._code = data.code;
     this._barcode = data.barcode;
     this._isActive = data.isActive || false;
     this.validate();
@@ -59,6 +71,13 @@ export class Product extends Entity {
     this._category = category;
   }
 
+  get code() {
+    return this._code;
+  }
+  set code(code: string) {
+    this._code = code;
+  }
+
   get barcode() {
     return this._barcode;
   }
@@ -74,6 +93,20 @@ export class Product extends Entity {
   }
   deactivate() {
     this._isActive = false;
+  }
+
+  update(data: ProductPropsUpdate) {
+    this.name = data.name || this.name;
+    this.description = data.description || this.description;
+    this.category = data.category || this.category;
+    this.code = data.code || this.code;
+    this.barcode = data.barcode || this.barcode;
+    if (data.isActive === true) {
+      this.activate();
+    }
+    if (data.isActive === false) {
+      this.deactivate();
+    }
   }
 
   toJSON() {

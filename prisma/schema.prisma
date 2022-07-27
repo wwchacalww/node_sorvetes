@@ -31,3 +31,15 @@ model RefreshTokens {
 
   @@map("refresh_tokens")
 }
+
+model Products {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String
+  category    String
+  code        String  @unique
+  barcode     String  @unique
+  isActive    Boolean @default(false)
+
+  @@map("products")
+}

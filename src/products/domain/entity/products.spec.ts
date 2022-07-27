@@ -6,6 +6,7 @@ describe("Product Entity Unit Test", () => {
       name: "Product 1",
       description: "Product 1 description",
       category: "Category 1",
+      code: "Code 1",
       barcode: "123456789",
       isActive: true,
     });
@@ -15,6 +16,23 @@ describe("Product Entity Unit Test", () => {
 
     product.deactivate();
     expect(product.isActive).toBeFalsy();
+  });
+
+  it("should update a Product", () => {
+    const product = new Product({
+      name: "Product 1",
+      description: "Product 1 description",
+      category: "Category 1",
+      code: "Code 1",
+      barcode: "123456789",
+      isActive: true,
+    });
+
+    product.update({
+      name: "Product 1 updated",
+    });
+    expect(product.name).toBe("Product 1 updated");
+    expect(product.description).toBe("Product 1 description");
   });
 
   it("should throw an error when creating a new product with invalid props", async () => {
@@ -28,11 +46,12 @@ describe("Product Entity Unit Test", () => {
         name: "Fu",
         description: "fu",
         category: "fu",
+        code: "Co",
         barcode: "",
         isActive: false,
       });
     }).toThrowError(
-      "Product: Product name must be at least 3 characters, Product: Category must be at least 3 characters, Product: Barcode is required, Product: Barcode must be at least 3 characters"
+      "Product: Product name must be at least 3 characters, Product: Category must be at least 3 characters, Product: Barcode is required, Product: Barcode must be at least 3 characters, Product: Code must be at least 3 characters"
     );
   });
 });
