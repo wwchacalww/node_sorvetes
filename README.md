@@ -29,7 +29,7 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 ## Autenticação e Autorização
 -[X] Criação do middleware de autenticação
 -[X] Refatorar routa com middleare
--[ ] Criação do middleware de autorização
+-[X] Criação do middleware de autorização
 -[X] Criação do refreshToken - rotas, controller e usecase
 
 ## Docker - Postgres
@@ -39,7 +39,7 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 -[X] Criar migrations do DB
 
 ## Produtos
--[X] Criar entidate
+-[X] Criar entidade
 -[X] Testes unitários
 -[X] Criar interface do repositório
 -[X] Criar migration e tabela product
@@ -47,3 +47,14 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 -[X] Criar usecase
 -[X] Criar Controllhers
 -[X] Criar rotas
+
+## Valor
+-[X] Criar entidade Prices
+-[X] Refatorar entidade Product
+-[X] Testes unitários
+-[ ] Criar tabela e relacionamento no DB
+-[ ] Criar interface do repositório
+-[ ] Criar repositório
+-[ ] Criar usecase
+-[ ] Criar Controllhers
+-[ ] Criar rotas
