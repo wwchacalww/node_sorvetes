@@ -10,8 +10,19 @@ export class ListProductsUseCase {
     private productRepository: ProductRepositoryInterface
   ) {}
   async execute(): Promise<ListProductsOutputDTO> {
+    const products = await this.productRepository.findAll();
     return {
-      products: await this.productRepository.findAll(),
+      products: products.map((product) => {
+        return {
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          category: product.category,
+          code: product.code,
+          barcode: product.barcode,
+          isActive: product.isActive,
+        };
+      }),
     };
   }
 }

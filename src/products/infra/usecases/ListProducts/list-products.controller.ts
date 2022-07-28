@@ -8,7 +8,11 @@ export class ListProductsController {
 
     try {
       const products = await listProducts.execute();
-      return response.status(200).json(products);
+      return response
+        .header("Access-Control-Expose-Headers", "x-total-count")
+        .setHeader("x-total-count", products.products.length.toString())
+        .status(200)
+        .json(products);
     } catch (err: any) {
       return response.status(400).json(err.errors);
     }

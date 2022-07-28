@@ -1,6 +1,7 @@
 import NotificationError from "../../../@seedwork/notification/notification.error";
 import Entity from "../../../@seedwork/entity/entity.abstract";
 import { ProductValidatorFactory } from "../factory/product-validator.factory";
+import { Price } from "./price";
 
 type ProductProps = {
   id?: string;
@@ -28,6 +29,7 @@ export class Product extends Entity {
   private _code: string;
   private _barcode: string;
   private _isActive: boolean;
+  private _prices: Price[] = [];
 
   constructor(data: ProductProps) {
     super(data.id);
@@ -93,6 +95,24 @@ export class Product extends Entity {
   }
   deactivate() {
     this._isActive = false;
+  }
+
+  value(date: Date = new Date()) {
+    if (this._prices.length === 0) {
+      return null;
+    }
+    const prices = this._prices.sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+
+    const result = prices.find(
+      (price) => price.createdAt.getTime() <= date.getTime()
+    );
+
+    return result;
+  }
+  addPrice(price: Price) {
+    this._prices.push(price);
   }
 
   update(data: ProductPropsUpdate) {
