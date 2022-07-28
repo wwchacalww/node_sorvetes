@@ -1,4 +1,3 @@
-import { Product } from "products/domain/entity/product";
 import { ProductRepositoryInterface } from "products/domain/repository/product-repository.interface";
 import { ListProductsOutputDTO } from "products/infra/dto";
 import { inject, injectable } from "tsyringe";
@@ -21,6 +20,7 @@ export class ListProductsUseCase {
           code: product.code,
           barcode: product.barcode,
           isActive: product.isActive,
+          price: product.value() ? product.value().price : undefined,
         };
       }),
     };

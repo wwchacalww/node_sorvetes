@@ -1,5 +1,5 @@
 import { ProductRepositoryInterface } from "products/domain/repository/product-repository.interface";
-import { CreateProductOutputDTO } from "products/infra/dto";
+import { ProductOutputDTO } from "products/infra/dto";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
@@ -9,7 +9,7 @@ export class FindByBarcodeProductUseCase {
     private productRepository: ProductRepositoryInterface
   ) {}
 
-  async execute(barcode: string): Promise<CreateProductOutputDTO> {
+  async execute(barcode: string): Promise<ProductOutputDTO> {
     const product = await this.productRepository.findByBarcode(barcode);
     return {
       id: product.id,
@@ -19,6 +19,7 @@ export class FindByBarcodeProductUseCase {
       code: product.code,
       barcode: product.barcode,
       isActive: product.isActive,
+      price: product.value() ? product.value().price : undefined,
     };
   }
 }

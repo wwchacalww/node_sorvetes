@@ -7,6 +7,7 @@ type PriceProps = {
   product_id: string;
   price: number;
   cost: number;
+  created_at?: Date;
 };
 
 export class Price extends Entity {
@@ -20,7 +21,7 @@ export class Price extends Entity {
     this._product_id = data.product_id;
     this._price = data.price;
     this._cost = data.cost;
-    this._createdAt = new Date();
+    this._createdAt = data.created_at || new Date();
     this.validate();
     if (this.notification.hasErrors()) {
       throw new NotificationError(this.notification.getErrors());

@@ -7,6 +7,17 @@ export interface CreateProductInputDTO {
   isActive: boolean;
 }
 
+export interface ProductOutputDTO {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  code: string;
+  barcode: string;
+  isActive: boolean;
+  price?: number;
+}
+
 export interface CreateProductOutputDTO {
   id: string;
   name: string;
@@ -18,7 +29,7 @@ export interface CreateProductOutputDTO {
 }
 
 export interface ListProductsOutputDTO {
-  products: CreateProductOutputDTO[];
+  products: ProductOutputDTO[];
 }
 
 export interface FindByNameProductsInputDTO {
@@ -33,4 +44,25 @@ export interface UpdateProductInputDTO {
   code?: string;
   barcode?: string;
   isActive?: boolean;
+}
+
+export interface SetProductPriceInputDTO {
+  product_id: string;
+  price: number;
+  cost: number;
+}
+
+export interface SetProductPriceOutPutDTO {
+  id: string;
+  price: number;
+  cost: number;
+  createdAt: Date;
+  Product: {
+    id: string;
+    name: string;
+    description: string;
+    category: string;
+    code: string;
+    barcode: string;
+  };
 }
