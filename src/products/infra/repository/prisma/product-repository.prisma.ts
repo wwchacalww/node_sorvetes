@@ -2,6 +2,7 @@ import { prisma } from "../../../../infra/db/prisma";
 import { Product } from "products/domain/entity/product";
 import { ProductRepositoryInterface } from "products/domain/repository/product-repository.interface";
 import NotificationError from "@seedwork/notification/notification.error";
+import { Price } from "products/domain/entity/price";
 
 export class ProductRepository implements ProductRepositoryInterface {
   async findByName(name: string): Promise<Product[] | undefined> {
@@ -11,13 +12,22 @@ export class ProductRepository implements ProductRepositoryInterface {
           contains: name,
         },
       },
+      include: {
+        Prices: true,
+      },
     });
 
-    if (result) {
-      return result.map((product) => new Product(product));
+    if (!result) {
+      return undefined;
     }
 
-    return undefined;
+    return result.map((product) => {
+      const productEntity = new Product(product);
+      product.Prices.forEach((price) => {
+        productEntity.addPrice(new Price(price));
+      });
+      return productEntity;
+    });
   }
 
   async findByBarcode(barcode: string): Promise<Product> {
@@ -25,20 +35,8 @@ export class ProductRepository implements ProductRepositoryInterface {
       where: {
         barcode,
       },
-    });
-
-    if (!result) {
-      throw new NotificationError([
-        { context: "FindProductDB", message: "Product not found" },
-      ]);
-    }
-    return new Product(result);
-  }
-
-  async findByCode(code: string): Promise<Product> {
-    const result = await prisma.products.findUnique({
-      where: {
-        code,
+      include: {
+        Prices: true,
       },
     });
 
@@ -47,7 +45,38 @@ export class ProductRepository implements ProductRepositoryInterface {
         { context: "FindProductDB", message: "Product not found" },
       ]);
     }
-    return new Product(result);
+    const product = new Product(result);
+
+    result.Prices.forEach((price) => {
+      product.addPrice(new Price(price));
+    });
+
+    return product;
+  }
+
+  async findByCode(code: string): Promise<Product> {
+    const result = await prisma.products.findUnique({
+      where: {
+        code,
+      },
+      include: {
+        Prices: true,
+      },
+    });
+
+    if (!result) {
+      throw new NotificationError([
+        { context: "FindProductDB", message: "Product not found" },
+      ]);
+    }
+
+    const product = new Product(result);
+
+    result.Prices.forEach((price) => {
+      product.addPrice(new Price(price));
+    });
+
+    return product;
   }
 
   async create(entity: Product): Promise<Product> {
@@ -109,6 +138,9 @@ export class ProductRepository implements ProductRepositoryInterface {
       where: {
         id,
       },
+      include: {
+        Prices: true,
+      },
     });
 
     if (!result) {
@@ -117,11 +149,27 @@ export class ProductRepository implements ProductRepositoryInterface {
       ]);
     }
 
-    return new Product(result);
+    const product = new Product(result);
+
+    result.Prices.forEach((price) => {
+      product.addPrice(new Price(price));
+    });
+
+    return product;
   }
 
   async findAll(): Promise<Product[]> {
-    const products = await prisma.products.findMany();
-    return products.map((product) => new Product(product));
+    const products = await prisma.products.findMany({
+      include: {
+        Prices: true,
+      },
+    });
+    return products.map((product) => {
+      const productEntity = new Product(product);
+      product.Prices.forEach((price) => {
+        productEntity.addPrice(new Price(price));
+      });
+      return productEntity;
+    });
   }
 }
