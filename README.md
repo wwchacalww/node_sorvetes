@@ -60,6 +60,10 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
 - [X] Criar Controllhers
 - [X] Criar rotas
 
-## Itens
-- [X] Criar entidade Itens
-- [X] Testes unitários
+## Fluxo de Produtos
+  - ## Itens
+    - [X] Criar entidade Itens
+    - [X] Testes unitários
+  - ## Estoque
+    - [X] Criar entidade Itens
+    - [X] Testes unitários
