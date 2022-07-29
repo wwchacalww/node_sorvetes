@@ -75,6 +75,8 @@ export class Item extends Entity {
       id: this.id,
       product: this.product.name,
       quantity: this.quantity,
+      price: this.product.value(this._createdAt).price,
+      cost: this.product.value(this._createdAt).cost,
       status: this.status,
       date: this._updatedAt,
       totalCost: this.totalCost(),
