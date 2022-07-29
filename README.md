@@ -67,3 +67,7 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
   - ## Estoque
     - [X] Criar entidade Itens
     - [X] Testes unitários
+
+  - ## Fluxo do Estoque
+    - [X] Criar entidate Order-Itens
+    - [X] Testes unitários

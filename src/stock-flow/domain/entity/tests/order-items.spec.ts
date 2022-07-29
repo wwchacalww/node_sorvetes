@@ -1,10 +1,10 @@
-import { Price } from "../../../products/domain/entity/price";
-import { Product } from "../../../products/domain/entity/product";
-import { Item } from "./item";
-import { Stock } from "./stock";
+import { Price } from "../../../../products/domain/entity/price";
+import { Product } from "../../../../products/domain/entity/product";
+import { Item } from "../item";
+import { OrderItems } from "../order-items";
 
-describe("Stock Entity Unit Test", () => {
-  it("should register items into stock", () => {
+describe("Order-Items Entity Unit Test", () => {
+  it("should register a new OrderItems", () => {
     const product = new Product({
       name: "Product 1",
       description: "Product 1 description",
@@ -51,12 +51,16 @@ describe("Stock Entity Unit Test", () => {
       status: "EM ESTOQUE",
     });
 
-    const stock = new Stock({
-      items: [item, item2],
+    const orderItem = new OrderItems({
+      items: [item],
+      type: "ENTRADA",
+      status: "EM ESTOQUE",
     });
 
-    expect(stock.items.length).toBe(2);
-    expect(stock.totalCost).toBe(36);
-    expect(stock.totalPrice).toBe(72);
+    orderItem.addItem(item2);
+
+    expect(orderItem.items.length).toBe(2);
+    expect(orderItem.totalCost).toBe(36);
+    expect(orderItem.totalPrice).toBe(72);
   });
 });

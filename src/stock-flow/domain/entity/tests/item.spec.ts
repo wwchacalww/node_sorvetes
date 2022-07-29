@@ -1,6 +1,6 @@
-import { Price } from "../../../products/domain/entity/price";
-import { Product } from "../../../products/domain/entity/product";
-import { Item } from "./item";
+import { Price } from "../../../../products/domain/entity/price";
+import { Product } from "../../../../products/domain/entity/product";
+import { Item } from "../item";
 
 describe("Item Entity Unit Test", () => {
   it("should create a new Item", () => {
