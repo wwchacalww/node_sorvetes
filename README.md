@@ -64,10 +64,22 @@ Repositório para fins de estudo e suporte para o repositório wwchacalww/next_s
   - ## Itens
     - [X] Criar entidade Itens
     - [X] Testes unitários
+    - [X] Criar o migration
+    - [ ] Criar o usecase
   - ## Estoque
     - [X] Criar entidade Itens
     - [X] Testes unitários
-
+    - [X] Criar o migration
+    - [ ] Criar o usecase
   - ## Fluxo do Estoque
     - [X] Criar entidate Order-Itens
     - [X] Testes unitários
+    - [X] Criar o migration
+    - [ ] Criar o usecase
+      - [X] Buy-items-order.usecase - comprar de items add items no stock
+        - [X] Verifica se já existe order de comprar na mesma data
+        - [X] Atualizar status do stock do dia anterior
+        - [X] Somente administrador poder fazer essa operação
+        - [X] Pode fazer várias compras no mesmo dia
+        - [X] Só existe 1 registro de stock no mesmo dia
+      - [ ] 
