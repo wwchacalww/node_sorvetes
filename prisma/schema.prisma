@@ -38,6 +38,7 @@ model Products {
   barcode     String   @unique
   isActive    Boolean  @default(false)
   Prices      Prices[]
+  Items       Items[]
 
   @@map("products")
 }
@@ -51,4 +52,59 @@ model Prices {
   Product    Products @relation(fields: [product_id], references: [id])
 
   @@map("prices")
+}
+
+model Items {
+  id           String         @id @default(uuid())
+  product_id   String
+  quantity     Int
+  status       String
+  price        Float
+  cost         Float
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @default(now())
+  Product      Products       @relation(fields: [product_id], references: [id])
+  ItemsOnStock ItemsOnStock[]
+  Stocks       Stock[]
+  Orders       Orders?        @relation(fields: [orders_id], references: [id])
+  orders_id    String?
+
+  @@map("items")
+}
+
+model Stock {
+  id           String         @id @default(uuid())
+  quantity     Int
+  status       String         @default("aberto")
+  price        Float
+  cost         Float
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @default(now())
+  ItemsOnStock ItemsOnStock[]
+  Items        Items[]
+
+  @@map("stock")
+}
+
+model ItemsOnStock {
+  item_id  String
+  item     Items  @relation(fields: [item_id], references: [id])
+  stock_id String
+  stock    Stock  @relation(fields: [stock_id], references: [id])
+
+  @@id([item_id, stock_id])
+  @@map("items_on_stock")
+}
+
+model Orders {
+  id         String   @id @default(uuid())
+  items      Items[]
+  type       String
+  status     String
+  totalCost  Float
+  totalPrice Float
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@map("orders")
 }

@@ -81,6 +81,9 @@ export class Item extends Entity {
       date: this._updatedAt,
       totalCost: this.totalCost(),
       totalPrice: this.totalPrice(),
+      product_id: this.product.id,
+      created_at: this.createdAt,
+      updated_at: this.updatedAt,
     };
   }
 

@@ -34,6 +34,10 @@ export class OrderItems extends Entity {
     return this._items.map((item) => item.toJSON());
   }
 
+  get entitiesItems() {
+    return this._items;
+  }
+
   get type() {
     return this._type;
   }

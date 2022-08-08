@@ -130,7 +130,6 @@ export class ProductRepository implements ProductRepositoryInterface {
 
   async delete(id: string): Promise<void> {
     const result = await prisma.products.delete({ where: { id } });
-    console.log(result);
   }
 
   async findById(id: string): Promise<Product> {
